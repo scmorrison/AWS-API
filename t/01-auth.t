@@ -11,7 +11,6 @@ use AWS::API::Auth::Utils;
 plan 3;
 
 my %config = access_key_id     => 'AKIAIOSFODNN7EXAMPLE',
-#my %config = access_key_id     => 'AKIAIOSFODNN7EXAMPLE',
              secret_access_key => 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
              region            => 'us-east-1';
 
