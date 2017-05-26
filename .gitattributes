@@ -1,0 +1,3 @@
+/lib/*.pm6 gitlab-language=perl
+*.pl6 gitlab-language=perl
+/t/*.t gitlab-language=perl
