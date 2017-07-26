@@ -1,14 +1,11 @@
 {
-    "perl"        : "6.*",
-    "name"        : "AWS::API",
-    "version"     : "0.0.1",
-    "author"      : "github:scmorrison",
-    "license"     : "Artistic-2.0",
-    "description" : "AWS API library",
+    "perl"          : "6.*",
+    "name"          : "AWS::API",
+    "version"       : "0.0.1",
+    "author"        : "github:scmorrison",
+    "license"       : "Artistic-2.0",
+    "description"   : "AWS API library",
     "build-depends" : [],
-    "test-depends" : [
-        "Test"
-    ],
     "provides" : {
         "AWS::Pricing"              : "lib/AWS/API.pm6",
         "AWS::Pricing::HTTP"        : "lib/AWS/API/HTTP.pm6",
@@ -17,8 +14,17 @@
         "AWS::Pricing::Signatures"  : "lib/AWS/API/Auth/Signatures.pm6",
         "AWS::Pricing::Utils"       : "lib/AWS/API/Auth/Utils.pm6"
     },
-    "depends"     : [ "Digest::HMAC", "Digest::SHA", "HTTP::Tinyish", "URI" ],
-    "source-url"  : "git://github.com/scmorrison/perl6-aws-api.git",
+    "depends"      : [
+        "Digest::HMAC",
+        "Digest::SHA",
+        "HTTP::Tinyish",
+        "URI"
+    ],
+    "test-depends" : [
+        "Test",
+        "Test::Output"
+    ],
+    "source-url"   : "git://github.com/scmorrison/perl6-aws-api.git",
     "authors" : [
         "Sam Morrison"
     ]
