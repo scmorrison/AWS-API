@@ -63,41 +63,24 @@ multi retrieve-runtime-value(Pair $value, %config where { $value.key ~~ 'system'
     note "value 1: {$value.perl}";
     %*ENV{$value.value};
 }
+
 multi retrieve-runtime-value(Pair $value, %config where { $value.key ~~ 'instance_role'}) {
     note "value 5: {$value.perl}";
     $value;
 }
+
 multi retrieve-runtime-value(Pair $value, %config where { $value.key ~~ 'awscli'}) {
     note "value 6: {$value.perl}";
     $value;
 }
+
 multi retrieve-runtime-value(%values, %config) {
     note "value 3: {%values.perl}, {%values.values.perl}";
 	%values.kv.map(-> $k, $v { note "value 3.5: {$k}"; retrieve-runtime-value($v, %config) });
-	#|> Stream.map(&retrieve_runtime_value(&1, config))
-	#|> Enum.find(&(&1))
 }
-#multi retrieve-runtime-value(%value where { .key ~~ ''  }, %config) {  %value }
+
+multi retrieve-runtime-value(%value where { .key ~~ ''  }, %config) {  %value }
 multi retrieve-runtime-value(MiscValue $value, %config) { note "value 2: {$value.perl}"; $value }
-multi retrieve-runtime-value($value, %config) { note "value 4: {$value.perl}"; }
-
-#def retrieve_runtime_config(config) do
-#	Enum.reduce(config, config, fn
-#		{:host, host}, config ->
-#			Map.put(config, :host, retrieve_runtime_value(host, config))
-#		{:retries, retries}, config ->
-#			Map.put(config, :retries, retries)
-#		{:http_opts, http_opts}, config ->
-#			Map.put(config, :http_opts, http_opts)
-#		{k, v}, config ->
-#			case retrieve_runtime_value(v, config) do
-#				%{} = result -> Map.merge(config, result)
-#				value -> Map.put(config, k, value)
-#		end
-#	end)
-#end
-
-
-
+multi retrieve-runtime-value($value, %config) { note "value 4: {$value.perl}";  }
 
 sub parse-host-for-region($config) { $config }
