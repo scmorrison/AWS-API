@@ -8,9 +8,9 @@ our sub generate-signature-v4(
     :$datetime,
     :$string_to_sign
 ) is export {
-    my $signing_key = signing-key($service, $datetime, $config);
-    my $signature   = hmac-sha256($signing_key, $string_to_sign);
-    bytes-to-hex($signature);
+    signing-key($service, $datetime, $config)
+    ==> hmac-sha256( $string_to_sign)
+    ==> bytes-to-hex();
 }
 
 sub signing-key(
@@ -18,8 +18,9 @@ sub signing-key(
     $datetime,
     $config
 ) {
-     my $hdate    = hmac-sha256( "AWS4{$config<secret_access_key>}",  date($datetime) );
-     my $hregion  = hmac-sha256($hdate, $config<region>);
-     my $hservice = hmac-sha256($hregion, $service);
-     hmac-sha256($hservice, 'aws4_request');
+     "AWS4{$config<secret_access_key>}"
+     ==> hmac-sha256(date($datetime))
+     ==> hmac-sha256($config<region>)
+     ==> hmac-sha256($service)
+     ==> hmac-sha256('aws4_request');
 }

@@ -138,9 +138,9 @@ our sub presigned-url(
                 ?? ("$amz_query&$org_query", "$org_query&$amz_query")
                 !! ($amz_query, $amz_query);
 
-            my $uri           = URI.new($url);
-            my $path          = $uri.path;
-            my $signature     = signature(
+            my $uri          = URI.new($url);
+            my $path         = $uri.path;
+            my $signature    = signature(
                 http_method => $http_method,
                 path        => $path,
                 query       => $query_to_sign,

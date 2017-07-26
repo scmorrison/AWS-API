@@ -42,7 +42,7 @@ our sub hash-sha256($data) is export {
 }
 
 
-our sub hmac-sha256($key, $data) is export {
+our sub hmac-sha256($data, $key) is export {
     hmac($key, $data, &sha256);
 }
 

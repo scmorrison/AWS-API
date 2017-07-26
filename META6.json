@@ -12,11 +12,12 @@
     "provides" : {
         "AWS::Pricing"              : "lib/AWS/API.pm6",
         "AWS::Pricing::HTTP"        : "lib/AWS/API/HTTP.pm6",
+        "AWS::Pricing::Credentials" : "lib/AWS/API/Auth.pm6",
         "AWS::Pricing::Credentials" : "lib/AWS/API/Auth/Credentials.pm6",
         "AWS::Pricing::Signatures"  : "lib/AWS/API/Auth/Signatures.pm6",
         "AWS::Pricing::Utils"       : "lib/AWS/API/Auth/Utils.pm6"
     },
-    "depends"     : [ "URI", "HTTP::Tinyish", "Test" ],
+    "depends"     : [ "Digest::HMAC", "Digest::SHA", "HTTP::Tinyish", "URI" ],
     "source-url"  : "git://github.com/scmorrison/perl6-aws-api.git",
     "authors" : [
         "Sam Morrison"
