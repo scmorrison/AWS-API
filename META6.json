@@ -24,7 +24,7 @@
         "Test",
         "Test::Output"
     ],
-    "source-url"   : "git://github.com/scmorrison/perl6-aws-api.git",
+    "source-url"   : "https://github.com/scmorrison/AWS-API.git",
     "authors" : [
         "Sam Morrison"
     ]
