@@ -7,14 +7,16 @@
     "description"   : "AWS API library",
     "build-depends" : [],
     "provides" : {
-        "AWS::Pricing"              : "lib/AWS/API.pm6",
-        "AWS::Pricing::HTTP"        : "lib/AWS/API/HTTP.pm6",
-        "AWS::Pricing::Credentials" : "lib/AWS/API/Auth.pm6",
-        "AWS::Pricing::Credentials" : "lib/AWS/API/Auth/Credentials.pm6",
-        "AWS::Pricing::Signatures"  : "lib/AWS/API/Auth/Signatures.pm6",
-        "AWS::Pricing::Utils"       : "lib/AWS/API/Auth/Utils.pm6"
+        "AWS::API"                 : "lib/AWS/API.pm6",
+        "AWS::API::HTTP"           : "lib/AWS/API/HTTP.pm6",
+        "AWS::API::Auth"           : "lib/AWS/API/Auth.pm6",
+        "AWS::API::Credentials"    : "lib/AWS/API/Auth/Credentials.pm6",
+        "AWS::API::CredentialsIni" : "lib/AWS/API/CredentialsIni.pm6",
+        "AWS::API::Signatures"     : "lib/AWS/API/Auth/Signatures.pm6",
+        "AWS::API::Utils"          : "lib/AWS/API/Auth/Utils.pm6"
     },
     "depends"      : [
+        "Config::INI",
         "Digest::HMAC",
         "Digest::SHA",
         "HTTP::Tinyish",

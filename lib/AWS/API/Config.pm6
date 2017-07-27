@@ -35,24 +35,31 @@ our sub build-base(
     %(%defaults, %common_config, %overrides);
 }
 
-sub retrieve-runtime-config(%config) {
-    %config.grep: -> $p {
-        next unless $p.key.defined && $p.value.defined;
-        given $p {
-            when .key ~~ 'host' {
-                %config<host> = retrieve-runtime-value(.value, %config);
-            };
-            when .key ~~ 'retries' {
-                %config<retries> = .value;
-            }
-            when .key ~~ 'http_opts' {
-                %config<http_opts> = .value;
-            }
-            default {
-                %config{.key} = retrieve-runtime-value($p, %config);
+sub retrieve-runtime-config($config) {
+    my %config = gather {
+        $config.grep: -> $p {
+            next unless $p.key.defined && $p.value.defined;
+            given $p {
+                when .key ~~ 'host' {
+                    take Pair.new('host', retrieve-runtime-value(.value, %config));
+                    #%config<host> = retrieve-runtime-value(.value, %config);
+                };
+                when .key ~~ 'retries' {
+                    take Pair.new('retries', .value);
+                    #%config<retries> = .value;
+                }
+                when .key ~~ 'http_opts' {
+                    take Pair.new('http_opts', .value);
+                    #%config<http_opts> = .value;
+                }
+                default {
+                    take Pair.new(.key, retrieve-runtime-value($p, $config));
+                    #%config{.key} = retrieve-runtime-value($p, $config);
+                }
             }
         }
     };
+    return %config;
 }
 
 
@@ -75,11 +82,14 @@ multi retrieve-runtime-value(Pair $value, %config where { $value.key ~~ 'awscli'
 }
 
 multi retrieve-runtime-value(%values, %config) {
-    note "value 3: {%values.perl}, {%values.values.perl}";
-	%values.kv.map(-> $k, $v { note "value 3.5: {$k}"; retrieve-runtime-value($v, %config) });
+    note "value 3: {%values.perl}";
+	map -> $k, $v {
+        note "value 3.5: {$k}";
+        retrieve-runtime-value($v, %config)
+    }, %values.kv;
 }
 
-multi retrieve-runtime-value(%value where { .key ~~ ''  }, %config) {  %value }
+multi retrieve-runtime-value($value where { !$value.defined  }, %config) {  $value }
 multi retrieve-runtime-value(MiscValue $value, %config) { note "value 2: {$value.perl}"; $value }
 multi retrieve-runtime-value($value, %config) { note "value 4: {$value.perl}";  }
 
