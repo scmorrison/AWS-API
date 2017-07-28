@@ -25,3 +25,26 @@ sub camelize(
 ) {
     $string.split(/\-|_/).map(-> $word { $word.tclc }).join;
 }
+
+sub iso-z-to-secs(
+    DateTime $date
+    --> Duration
+) is export {
+    $date - DateTime.new('1970-01-01T00:00:00Z');
+}
+
+sub now-in-seconds(--> Duration) is export {
+    now - DateTime.new('1970-01-01T00:00:00Z');
+}
+
+sub rename-keys(
+    Hash $params,
+    Hash $mapping
+    --> Hash()
+) is export {
+    map -> $k, $v {
+        Pair.new: $mapping{$k} || $k, $v;
+    }, kv $params
+}
+
+

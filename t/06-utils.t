@@ -6,7 +6,7 @@ use Test;
 use lib 'lib';
 use AWS::API::Utils;
 
-plan 1;
+plan 3;
 
 subtest {
     plan 6;
@@ -19,3 +19,6 @@ subtest {
 	is camelize-keys(%{ foo_bar => [ "foo", "bar" ] }, spec => %{ foo_bar => "non-standard" }),
 	   %{ non-standard => %{ foo => "bar" }}, "non-standard";
 }, 'camelize-keys';
+
+is iso-z-to-secs(DateTime.new('2015-07-05T22:16:18Z')), 1436134604, 'iso-z-to-secs iso string to epoch seconds';
+is rename-keys(%{ a => 1, b => 2, c => 3}, %{ a => 'd', c => 'e' }), %{ d => 1, b => 2, e => 3 }, 'rename-keys from keyword list';

@@ -4,5 +4,5 @@ perl6:
   - latest
 install:
   - rakudobrew build-zef
-  - zef --deps-only --\test install .
+  - zef --deps-only --/test install .
   - prove -ve 'perl6 -Ilib' t/
