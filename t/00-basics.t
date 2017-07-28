@@ -2,7 +2,7 @@ use v6;
 use Test;
 use lib 'lib';
  
-plan 7;
+plan 8;
 
 # use
 use-ok('AWS::API');
