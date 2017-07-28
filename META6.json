@@ -10,10 +10,10 @@
         "AWS::API"                 : "lib/AWS/API.pm6",
         "AWS::API::HTTP"           : "lib/AWS/API/HTTP.pm6",
         "AWS::API::Auth"           : "lib/AWS/API/Auth.pm6",
+        "AWS::API::Auth::Utils"    : "lib/AWS/API/Auth/Utils.pm6",
         "AWS::API::Credentials"    : "lib/AWS/API/Auth/Credentials.pm6",
         "AWS::API::CredentialsIni" : "lib/AWS/API/CredentialsIni.pm6",
         "AWS::API::Signatures"     : "lib/AWS/API/Auth/Signatures.pm6",
-        "AWS::API::Utils"          : "lib/AWS/API/Auth/Utils.pm6"
     },
     "depends"      : [
         "Config::INI",
