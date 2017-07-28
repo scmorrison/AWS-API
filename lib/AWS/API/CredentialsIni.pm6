@@ -9,27 +9,26 @@ our sub parse-ini-file(
     Str :$profile
     --> Hash()
 ) {
-    Config::INI::parse($ini){$profile}
-    ==> map(&strip-key-prefix);
+    map &strip-key-prefix, Config::INI::parse($ini){$profile};
 }
 
 sub strip-key-prefix(
     Hash $credentials
     --> Hash()
 ) {
-    $credentials<aws_access_key_id aws_secret_access_key aws_session_token region>:kv
-    ==> map( -> $k, $v { Pair.new: $k.subst('aws_', ''), $v });
+    map -> $k, $v {
+        (S/'aws_'// given $k) => $v
+    }, $credentials<aws_access_key_id aws_secret_access_key aws_session_token region>:kv;
 }
 
 our sub replace-token-key(
     Hash $credentials
     --> Hash()
 ) {
-    $credentials.kv
-    ==> map( -> $k, $v { 
+    map -> $k, $v { 
         given $k {
-            when 'session_token' { Pair.new: 'security_token', $v }
-            default { Pair.new: $k, $v }
+            when 'session_token' { security_token => $v }
+            default { $k => $v }
         }
-    });
+    }, kv $credentials;
 }
