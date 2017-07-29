@@ -4,7 +4,6 @@ use v6;
 
 use Test;
 use Test::Output;
-use File::Temp;
 use URI;
 use lib 'lib';
 use AWS::API::Auth::Credentials;
