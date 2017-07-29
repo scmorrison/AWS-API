@@ -16,6 +16,7 @@
         "AWS::API::Config::Defaults"  : "lib/AWS/API/Config/Defaults.pm6",
         "AWS::API::CredentialsIni"    : "lib/AWS/API/CredentialsIni.pm6",
         "AWS::API::HTTP"              : "lib/AWS/API/HTTP.pm6",
+        "AWS::API::Request::Url"      : "lib/AWS/API/Request/Url.pm6",
         "AWS::API::Utils"             : "lib/AWS/API/Utils.pm6"
     },
     "depends"      : [
@@ -23,7 +24,8 @@
         "Digest::HMAC",
         "Digest::SHA",
         "HTTP::Tinyish",
-        "URI"
+        "URI",
+        "URI::Template"
     ],
     "test-depends" : [
         "Test",
